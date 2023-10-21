@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,14 +14,17 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -45,9 +48,24 @@ public class AjouterrestauController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                  loadInitialDataFromDatabase();
+                 
+    
+    listv.setCellFactory(param -> new ListCell<restaurant>() {//added19
+        @Override
+        protected void updateItem(restaurant item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+            } else {
+                setText("Nom: " + item.getNom() + ", Location: " + item.getlocation());
+            }
+        }
+    });
+
+    
         listv.setItems(restaurantlist);
-        // TODO
-    }    
+    } // TODO
+        
       private void loadInitialDataFromDatabase() {
           servicesrestaurant ps = new servicesrestaurant();
     List<restaurant> initialrestaurant = ps.affihcer();
@@ -83,6 +101,25 @@ public class AjouterrestauController implements Initializable {
    
     
     // Check if an item is selected
+    listv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {//added 19
+            if (event.getClickCount() == 2) { // Double-click event
+                restaurant selectedRestaurant = listv.getSelectionModel().getSelectedItem();
+                if (selectedRestaurant != null) {
+                    // Populate the fields with the selected restaurant's data
+                    int id = selectedRestaurant.getId();
+                    String nom = selectedRestaurant.getNom();
+                    String location = selectedRestaurant.getlocation();
+                    
+                    // Now set the individual fields with the retrieved data
+                    idrestaus.setText(String.valueOf(id));
+                    nomrestau.setText(nom);
+                    locationrestau.setText(location);
+                }
+            }   }
+    });
+         /////
   
         String nom=nomrestau.getText();
         String location = locationrestau.getText();

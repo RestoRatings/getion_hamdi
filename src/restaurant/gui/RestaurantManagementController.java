@@ -45,6 +45,7 @@ public class RestaurantManagementController implements Initializable {
         AjouterrestauController ajouterrestau = loader.getController();
         // Initialize data or perform other operations here
         Scene scene = new Scene(root);
+        
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

@@ -93,8 +93,10 @@ public class servicesrestaurant implements  Iservice <restaurant>{
                 restaurant r= new restaurant(rs.getInt("id_restau"),
                         rs.getString("nom"), rs.getString("location"));
                 restaurantss.add(r);
-                        for (restaurant element : restaurantss) {
-            System.out.println(element);
+                for (restaurant element : restaurantss) {
+                String  hell=element.toStringForDisplay();
+                System.out.println(  hell);
+            
         }
             }
         } catch (SQLException ex) {

@@ -55,11 +55,13 @@ public class restaurant {
 
     public restaurant() {
     }
-
+         public String toStringForDisplay() {
+        return this.nom + " - " + this.location;
+    }
     @Override
     public String toString() {
         return "personne id:"+this.id_restau+"  "+this.nom+ " "+ this.location  ;
     }
-    
-    
+ 
+      
 }

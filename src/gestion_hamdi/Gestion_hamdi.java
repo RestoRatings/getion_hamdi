@@ -37,7 +37,7 @@ public class Gestion_hamdi {
         restaurant p2 = new restaurant(1,"yummy","gabes");
         restaurant p3 = new restaurant(21, "hamdi", "salah");
         
-        
+            
        
     
         
@@ -49,7 +49,7 @@ public class Gestion_hamdi {
         
         
       sp.modifier(p3);
-       sp.affihcer() ;
+       sp.affihcer();
        
     
       
