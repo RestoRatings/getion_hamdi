@@ -25,6 +25,7 @@ public class reservation {
     private LocalDate datereser ;
     private LocalTime timereser;
     restaurant restau;
+     private String restauNom;
 
     public int getId_res() {
         return id_res;
@@ -84,6 +85,7 @@ public class reservation {
     public void setId(int id) {
         this.id_res = id;
     }
+    
 
  
 

@@ -97,7 +97,10 @@ public class servicesreservation implements  Iservice <reservation>{
     @Override
     public List<reservation> affihcer() {
         List<reservation> reservation = new ArrayList<>();
-        String sql ="select * from reservation";
+       // String sql ="select * from reservation";
+        String sql = "SELECT r.*, re.nom AS restauNom, re.location AS restauLocation " +
+                 "FROM reservation r " +
+                 "JOIN restaurant re ON r.id_restau = re.id_restau";
         try {
             ste= con.createStatement();
             ResultSet rs = ste.executeQuery(sql);
@@ -109,12 +112,25 @@ public class servicesreservation implements  Iservice <reservation>{
             LocalDate localDate = LocalDate.parse(rs.getString("datereser"), formatter);
               DateTimeFormatter formatters = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalTime times = LocalTime.parse(rs.getString("timereser"), formatters);
-                
+                restaurant restaurantObject = new restaurant();
                      reservation r= new reservation(rs.getInt("id_res"),
-                        localDate, times);
+                        localDate, times,restaurantObject);
+                     
+           // restaurant restaurantObject = new restaurant();
+            restaurantObject.setNom(rs.getString("restauNom"));
+            restaurantObject.setlocation(rs.getString("restauLocation"));
+
+            r.setRestau(restaurantObject);
+                      
                 reservation.add(r);
                         for (reservation element : reservation) {
-            System.out.println(element);
+                System.out.print("Reservation ID: " + element.getId_res());
+    System.out.print(" | Reservation Date: " + element.getDatereser());
+    System.out.print(" | Reservation Time: " + element.getTimereser());
+    System.out.print(" | Restaurant Name: " + element.getRestau().getNom());
+    System.out.println(" | Restaurant Location: " + element.getRestau().getlocation());
+
+            
             }}
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

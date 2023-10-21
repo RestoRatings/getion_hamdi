@@ -28,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -66,8 +67,36 @@ public class ReservationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
              loadInitialDataFromDatabase();
+                restaurantres.setCellFactory(param -> new ListCell<restaurant>() {//added19
+        @Override
+        protected void updateItem(restaurant item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+            } else {
+                setText("Nom: " + item.getNom() + ", Location: " + item.getlocation());
+            }
+        }
+    });
+
         restaurantres.setItems(restaurantlist);
                   loadInitialDataFromDatabase();
+                   listres.setCellFactory(param -> new ListCell<reservation>() {
+        @Override
+        protected void updateItem(reservation item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+            } else {
+                setText(
+                         " | Date: " + item.getDatereser() +
+                         " | Time: " + item.getTimereser() +
+                         " | Restaurant Name: " + item.getRestau().getNom() +
+                         " | Restaurant Location: " + item.getRestau().getlocation());
+            }
+        }
+    });
+
         listres.setItems(reservationlist);
         // TODO
        
