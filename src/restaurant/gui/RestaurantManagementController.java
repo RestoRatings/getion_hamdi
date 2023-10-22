@@ -63,7 +63,19 @@ public class RestaurantManagementController implements Initializable {
         stage.setScene(scene);
         stage.show();
         }
-   
+         @FXML
+    public void test (ActionEvent event) throws IOException {
+      
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("reservationuser.fxml"));
+        Parent root = loader.load();
+        // Access the StartController if needed
+        ReservationuserController ajouterres = loader.getController();
+        // Initialize data or perform other operations here
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        }
 }
        
 

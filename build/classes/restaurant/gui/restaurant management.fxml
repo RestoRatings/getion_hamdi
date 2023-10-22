@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.gui.RestaurantManagementController">
    <children>
-      <Button layoutX="375.0" layoutY="55.0" mnemonicParsing="false" onAction="#ajoutersc" prefHeight="74.0" prefWidth="167.0" text="ajouter " />
+      <Button layoutX="375.0" layoutY="55.0" mnemonicParsing="false" onAction="#ajoutersc" prefHeight="74.0" prefWidth="167.0" text="restaurant" />
       <Button layoutX="375.0" layoutY="201.0" mnemonicParsing="false" onAction="#reservation" prefHeight="73.0" prefWidth="167.0" text="reservation" />
       <Text layoutX="51.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome ">
          <font>
@@ -21,5 +21,6 @@
             <Image url="@../../image/images.png" />
          </image>
       </ImageView>
+      <Button layoutX="147.0" layoutY="275.0" mnemonicParsing="false" onAction="#test" prefHeight="74.0" prefWidth="167.0" text="test" />
    </children>
 </AnchorPane>
