@@ -6,6 +6,7 @@
 package restaurant.gui;
 
 import com.sun.xml.internal.bind.IDResolver;
+import gestion_hamdi.TwilloSMS;
 import gestion_hamdi.reservation;
 import gestion_hamdi.restaurant;
 import gestion_hamdi.servicesreservation;
@@ -28,6 +29,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
@@ -152,12 +155,19 @@ public class ReservationController implements Initializable {
            String selectedTime = selectedHour + ":" + selectedMinutes;
         System.out.println(selectedTime);
           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                if (selectedDate == null || selectedHour == null || selectedMinutes == null ) {
+            // Show an alert with the custom message
+            showAlert("incomplete data ");
+            return; // Exit the method to prevent further execution
+        }
 
         
             // Parse the string into a LocalTime
             LocalTime localTime = LocalTime.parse(selectedTime, formatter);
         
          restaurant selectedrestaurant = restaurantres.getSelectionModel().getSelectedItem();
+        
+         
          servicesreservation res = new servicesreservation();
           reservation r = new reservation(1, selectedDate, localTime, selectedrestaurant);
           res.ajouter(r);
@@ -168,6 +178,10 @@ public class ReservationController implements Initializable {
 
     // Set the ListView items to circuitList to reflect the updated data
     listres.setItems(reservationlist);
+          /* String toPhoneNumber = "+21692548524"; // Replace with recipient's phone number
+        String messageBody = "Your reservation has been confirmed. Thank you for choosing our restaurant.";
+        TwilloSMS.sendSMS(toPhoneNumber, messageBody);*/
+     
           
 
         // Combine the hour and minutes into a time variable.
@@ -216,6 +230,11 @@ public class ReservationController implements Initializable {
            String selectedTime = selectedHour + ":" + selectedMinutes;
         System.out.println(selectedTime);
           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                      if (selectedDate == null || selectedHour == null || selectedMinutes == null ) {
+            // Show an alert with the custom message
+            showAlert("incomplete data ");
+            return; // Exit the method to prevent further execution
+        }
 
         
             // Parse the string into a LocalTime
@@ -243,6 +262,11 @@ public class ReservationController implements Initializable {
     // Check if an item is selected
     if (selectedres == null) {
         System.out.println("No item selected for deletion.");
+               
+            // Show an alert with the custom message
+            showAlert("select a reservation ");
+          
+        
         return;
     }
 
@@ -276,6 +300,13 @@ public void goBackToManagement(ActionEvent event) {
     } catch (IOException e) {
         e.printStackTrace();
     }
+}
+private void showAlert(String message) {
+    Alert alert = new Alert(AlertType.WARNING);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
 }}
    
         

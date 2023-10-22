@@ -7,15 +7,22 @@ package restaurant.gui;
 
 import gestion_hamdi.restaurant;
 import gestion_hamdi.servicesrestaurant;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -58,7 +65,26 @@ public class RestaurantuserController implements Initializable {
     restaurantlist.clear();
     restaurantlist.addAll(initialrestaurant);
 }
-        // TODO
+    // TODO
+      
+      
+@FXML
+public void backrestauu(ActionEvent event) {
+    // Load the FXML file for the "restaurant management" scene
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("restaurant management.fxml"));
+    try {
+        Parent root = loader.load();
+        Scene managementScene = new Scene(root);
+
+        // Get the current stage
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene of the stage to the "restaurant management" scene
+        currentStage.setScene(managementScene);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     }    
     
 

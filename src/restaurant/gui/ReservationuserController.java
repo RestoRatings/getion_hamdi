@@ -28,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
@@ -109,7 +110,7 @@ public class ReservationuserController implements Initializable {
         listresu.setItems(reservationlist);
         // TODO
        
-         for (int i = 0; i <= 24; i++) {
+         for (int i = 0; i <= 23; i++) {
             String hour = String.format("%02d", i);
             hourres.getItems().add(hour);
         }
@@ -151,6 +152,11 @@ public class ReservationuserController implements Initializable {
         String selectedMinutes = minuteres.getValue();
            String selectedTime = selectedHour + ":" + selectedMinutes;
         System.out.println(selectedTime);
+                           if (selectedDate == null || selectedHour == null || selectedMinutes == null ) {
+            // Show an alert with the custom message
+            showAlert("incomplete data ");
+            return; // Exit the method to prevent further execution
+        }
           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         
@@ -215,6 +221,11 @@ public class ReservationuserController implements Initializable {
         String selectedMinutes = minuteres.getValue();
            String selectedTime = selectedHour + ":" + selectedMinutes;
         System.out.println(selectedTime);
+                           if (selectedDate == null || selectedHour == null || selectedMinutes == null ) {
+            // Show an alert with the custom message
+            showAlert("incomplete data ");
+            return; // Exit the method to prevent further execution
+        }
           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         
@@ -242,7 +253,7 @@ public class ReservationuserController implements Initializable {
 
     // Check if an item is selected
     if (selectedres == null) {
-        System.out.println("No item selected for deletion.");
+        showAlert("no item selected");
         return;
     }
 
@@ -276,6 +287,13 @@ public void goBackToManagement(ActionEvent event) {
     } catch (IOException e) {
         e.printStackTrace();
     }
+}
+private void showAlert(String message) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
 }}
    
         

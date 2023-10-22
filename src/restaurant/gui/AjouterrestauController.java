@@ -5,6 +5,8 @@
  */
 package restaurant.gui;
 
+
+import gestion_hamdi.pdf;
 import gestion_hamdi.restaurant;
 import gestion_hamdi.servicesrestaurant;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -33,7 +37,8 @@ import javafx.stage.Stage;
  * @author Hamdi
  */
 public class AjouterrestauController implements Initializable {
-
+      @FXML
+    private DialogPane dialoguerestau;
       @FXML
     private TextField nomrestau;
     @FXML
@@ -83,11 +88,25 @@ public class AjouterrestauController implements Initializable {
         String nom=nomrestau.getText();
         String location = locationrestau.getText();
          
+        if (nom.isEmpty()||location.isEmpty()) {
+            // Set the message on the Label
+              showAlert("incomplete data ");
+            
+        
+        } 
+      
+                
          servicesrestaurant sp = new servicesrestaurant();
         restaurant p = new restaurant( nom,location );
         sp.ajouter(p);
          List<restaurant> updatedCircuits = sp.affihcer();
-            // Update circuitList with the new data
+         
+            
+                // Specify the output file path where you want to save the PDF
+    String outputPath = "restaurant_data.pdf";
+    
+    // Use the PDFGenerator class to generate the PDF
+    pdf.generateRestaurantPDF(updatedCircuits, outputPath);
     restaurantlist.clear();
     restaurantlist.addAll(updatedCircuits);
 
@@ -124,6 +143,13 @@ public class AjouterrestauController implements Initializable {
         String nom=nomrestau.getText();
         String location = locationrestau.getText();
         int id = Integer.parseInt( idrestaus.getText());
+    if (nom.isEmpty()||location.isEmpty()) {
+            // Set the message on the Label
+              showAlert("incomplete data ");
+            
+        
+        } 
+                
          servicesrestaurant sp = new servicesrestaurant();
         restaurant p = new restaurant( id,nom,location );
         sp.modifier(p);
@@ -141,7 +167,7 @@ public class AjouterrestauController implements Initializable {
 
     // Check if an item is selected
     if (selectedrestaurant == null) {
-        System.out.println("No item selected for deletion.");
+        showAlert("no item selected");
         return;
     }
 
@@ -185,4 +211,11 @@ public void goBackToManagement(ActionEvent event) {
     locationrestau.clear();
    
     }
+    private void showAlert(String message) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
 }

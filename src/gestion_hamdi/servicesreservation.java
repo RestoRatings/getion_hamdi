@@ -99,8 +99,10 @@ public class servicesreservation implements  Iservice <reservation>{
         List<reservation> reservation = new ArrayList<>();
        // String sql ="select * from reservation";
         String sql = "SELECT r.*, re.nom AS restauNom, re.location AS restauLocation " +
-                 "FROM reservation r " +
-                 "JOIN restaurant re ON r.id_restau = re.id_restau";
+             "FROM reservation r " +
+             "JOIN restaurant re ON r.id_restau = re.id_restau ";// + // Add a space here
+           //  "WHERE r.id_restau = 21";
+
         try {
             ste= con.createStatement();
             ResultSet rs = ste.executeQuery(sql);

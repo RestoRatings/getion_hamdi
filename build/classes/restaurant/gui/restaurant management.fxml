@@ -21,6 +21,6 @@
             <Image url="@../../image/images.png" />
          </image>
       </ImageView>
-      <Button layoutX="147.0" layoutY="275.0" mnemonicParsing="false" onAction="#test" prefHeight="74.0" prefWidth="167.0" text="test" />
+      <Button layoutX="171.0" layoutY="287.0" mnemonicParsing="false" onAction="#testu" prefHeight="73.0" prefWidth="167.0" text="testu" />
    </children>
 </AnchorPane>
