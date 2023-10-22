@@ -12,6 +12,7 @@ import gestion_hamdi.servicesreservation;
 import gestion_hamdi.servicesrestaurant;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +33,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -57,6 +60,12 @@ public class ReservationController implements Initializable {
     private ListView<reservation> listres;
     
      private ObservableList<reservation> reservationlist = FXCollections.observableArrayList();
+     
+  private restaurant selectedrestaurants;
+    public void setSelectedRestaurant(restaurant selectedRestaurant) {
+        this.selectedrestaurants = selectedRestaurant;
+    }
+    
      /* Initializes the controller class.
      */
   
@@ -110,6 +119,7 @@ public class ReservationController implements Initializable {
             String minute = String.format("%02d", i);
             minuteres.getItems().add(minute);
         }
+        System.out.println(selectedrestaurants);
     }
    
           private void loadInitialDataFromDatabase() {
@@ -164,6 +174,39 @@ public class ReservationController implements Initializable {
      
 }
             public void modres (ActionEvent event){
+                  listres.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {//added 19
+            if (event.getClickCount() == 2) { // Double-click event
+                reservation selectedReservation = listres.getSelectionModel().getSelectedItem();
+                if (selectedReservation != null) {
+                    // Populate the fields with the selected restaurant's data
+                    int id = selectedReservation.getId();
+                            // Define the desired date format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Format the LocalDate as a string
+        String formattedDate = selectedReservation.getDatereser().format(formatter);
+                  
+        DateTimeFormatter formattert = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        // Format the LocalTime as a string
+        String formattedTime = selectedReservation.getTimereser().format(formattert);
+                 String[] parts = formattedTime.split(":"); // Split the string using ":"
+              String hour = parts[0]; // "22"
+              String minute = parts[1]; // "00"
+      
+                      
+                    
+                    // Now set the individual fields with the retrieved data
+                    idres.setText(String.valueOf(id));
+                    date.setValue(selectedReservation.getDatereser());
+                    hourres.setValue(hour);
+                    minuteres.setValue(minute);
+                          
+                }
+            }   }
+    });
             LocalDate selectedDate = date.getValue();
             System.out.println("Selected Date: " + selectedDate);
      
