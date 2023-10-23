@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -14,6 +15,9 @@
          </font>
       </Text>
       <ListView fx:id="listresuser" layoutX="68.0" layoutY="95.0" prefHeight="221.0" prefWidth="424.0" />
-      <Button layoutX="214.0" layoutY="337.0" mnemonicParsing="false" onAction="#backrestauu" prefHeight="42.0" prefWidth="86.0" text="back" />
+      <Button layoutX="395.0" layoutY="331.0" mnemonicParsing="false" onAction="#backrestauu" prefHeight="42.0" prefWidth="86.0" text="back" />
+      <Button layoutX="287.0" layoutY="331.0" mnemonicParsing="false" onAction="#search" prefHeight="42.0" prefWidth="86.0" text="search" />
+      <TextField fx:id="locationss" layoutX="75.0" layoutY="339.0" />
+      <Button layoutX="499.0" layoutY="125.0" mnemonicParsing="false" onAction="#chart" text="Button" />
    </children>
 </AnchorPane>

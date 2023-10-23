@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +21,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -32,6 +35,12 @@ import javafx.stage.Stage;
 public class RestaurantuserController implements Initializable {
               @FXML
     private ListView<restaurant> listresuser;
+             @FXML
+    private Button search;
+                         @FXML
+    private Button chart;
+               @FXML
+    private TextField locationss;
     
      private ObservableList<restaurant> restaurantlist = FXCollections.observableArrayList();
 
@@ -55,6 +64,7 @@ public class RestaurantuserController implements Initializable {
 
     
         listresuser.setItems(restaurantlist);
+     
     } // TODO
         
       private void loadInitialDataFromDatabase() {
@@ -85,6 +95,42 @@ public void backrestauu(ActionEvent event) {
         e.printStackTrace();
     }
 }
-    }    
+
+private void filterListView(String location) {
+    // Create a filtered list based on the provided location
+    List<restaurant> filteredList = restaurantlist.stream()
+            .filter(restaurant -> restaurant.getlocation().contains(location))
+            .collect(Collectors.toList());
+
+    // Update the ListView with the filtered data
+    listresuser.setItems(FXCollections.observableArrayList(filteredList));
+}
+@FXML
+public void search(ActionEvent event) {
+            
+         
+        String location = locationss.getText();
+        filterListView(location);
+    }
+
+       @FXML
+public void chart(ActionEvent event) {
+            
+         
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("chart.fxml"));
+    try {
+        Parent root = loader.load();
+        Scene managementScene = new Scene(root);
+
+        // Get the current stage
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene of the stage to the "restaurant management" scene
+        currentStage.setScene(managementScene);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+}
     
 
