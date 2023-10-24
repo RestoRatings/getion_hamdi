@@ -5,7 +5,7 @@
  */
 package restaurant.gui;
 
-import gestion_hamdi.restaurant;
+import gestion_hamdi.Restaurant;
 import gestion_hamdi.servicesrestaurant;
 import java.io.IOException;
 import java.net.URL;
@@ -34,15 +34,14 @@ import javafx.stage.Stage;
  */
 public class RestaurantuserController implements Initializable {
               @FXML
-    private ListView<restaurant> listresuser;
+    private ListView<Restaurant> listresuser;
              @FXML
     private Button search;
-                         @FXML
-    private Button chart;
+                      
                @FXML
     private TextField locationss;
     
-     private ObservableList<restaurant> restaurantlist = FXCollections.observableArrayList();
+     private ObservableList<Restaurant> restaurantlist = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -50,9 +49,9 @@ public class RestaurantuserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadInitialDataFromDatabase();
-            listresuser.setCellFactory(param -> new ListCell<restaurant>() {//added19
+            listresuser.setCellFactory(param -> new ListCell<Restaurant>() {//added19
         @Override
-        protected void updateItem(restaurant item, boolean empty) {
+        protected void updateItem(Restaurant item, boolean empty) {
             super.updateItem(item, empty);
             if (empty || item == null) {
                 setText(null);
@@ -69,7 +68,7 @@ public class RestaurantuserController implements Initializable {
         
       private void loadInitialDataFromDatabase() {
           servicesrestaurant ps = new servicesrestaurant();
-    List<restaurant> initialrestaurant = ps.affihcer();
+    List<Restaurant> initialrestaurant = ps.affihcer();
     
     // Populate circuitList with the initial data from the database
     restaurantlist.clear();
@@ -98,7 +97,7 @@ public void backrestauu(ActionEvent event) {
 
 private void filterListView(String location) {
     // Create a filtered list based on the provided location
-    List<restaurant> filteredList = restaurantlist.stream()
+    List<Restaurant> filteredList = restaurantlist.stream()
             .filter(restaurant -> restaurant.getlocation().contains(location))
             .collect(Collectors.toList());
 
@@ -113,24 +112,7 @@ public void search(ActionEvent event) {
         filterListView(location);
     }
 
-       @FXML
-public void chart(ActionEvent event) {
-            
-         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("chart.fxml"));
-    try {
-        Parent root = loader.load();
-        Scene managementScene = new Scene(root);
 
-        // Get the current stage
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene of the stage to the "restaurant management" scene
-        currentStage.setScene(managementScene);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    }
 }
     
 

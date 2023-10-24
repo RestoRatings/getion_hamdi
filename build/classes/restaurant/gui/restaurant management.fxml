@@ -7,20 +7,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.gui.RestaurantManagementController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.gui.RestaurantManagementController">
    <children>
-      <Button layoutX="375.0" layoutY="55.0" mnemonicParsing="false" onAction="#ajoutersc" prefHeight="74.0" prefWidth="167.0" text="restaurant" />
-      <Button layoutX="375.0" layoutY="201.0" mnemonicParsing="false" onAction="#reservation" prefHeight="73.0" prefWidth="167.0" text="reservation" />
-      <Text layoutX="51.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome ">
-         <font>
-            <Font size="63.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="88.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+             <ImageView fitHeight="800.0" fitWidth="1000.0" >
          <image>
-            <Image url="@../../image/images.png" />
+            <Image url="@../../image/Bone%20White%20Blue%20Groovy%20You%20Matter%20Desktop%20Wallpaper.png" />
          </image>
       </ImageView>
-      <Button layoutX="171.0" layoutY="287.0" mnemonicParsing="false" onAction="#testu" prefHeight="73.0" prefWidth="167.0" text="testu" />
+  
+      <Button layoutX="303.0" layoutY="210.0" mnemonicParsing="false" onAction="#ajoutersc" prefHeight="106.0" prefWidth="203.0" text="restaurant" />
+      <Button layoutX="680.0" layoutY="203.0" mnemonicParsing="false" onAction="#reservation" prefHeight="106.0" prefWidth="203.0" text="reservation" />
+      <Text layoutX="56.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome " wrappingWidth="151.4123992919922">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Text>
+      <Button layoutX="321.0" layoutY="467.0" mnemonicParsing="false" onAction="#testu" prefHeight="73.0" prefWidth="167.0" text="testu" />
+  
    </children>
 </AnchorPane>

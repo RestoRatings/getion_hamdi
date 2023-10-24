@@ -7,7 +7,7 @@ package restaurant.gui;
 
 
 import gestion_hamdi.pdf;
-import gestion_hamdi.restaurant;
+import gestion_hamdi.Restaurant;
 import gestion_hamdi.servicesrestaurant;
 import java.io.IOException;
 import java.net.URL;
@@ -46,18 +46,18 @@ public class AjouterrestauController implements Initializable {
        @FXML
     private TextField idrestaus;
             @FXML
-    private ListView<restaurant> listv;
+    private ListView<Restaurant> listv;
     
-     private ObservableList<restaurant> restaurantlist = FXCollections.observableArrayList();
+     private ObservableList<Restaurant> restaurantlist = FXCollections.observableArrayList();
      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                  loadInitialDataFromDatabase();
                  
     
-    listv.setCellFactory(param -> new ListCell<restaurant>() {//added19
+    listv.setCellFactory(param -> new ListCell<Restaurant>() {//added19
         @Override
-        protected void updateItem(restaurant item, boolean empty) {
+        protected void updateItem(Restaurant item, boolean empty) {
             super.updateItem(item, empty);
             if (empty || item == null) {
                 setText(null);
@@ -73,7 +73,7 @@ public class AjouterrestauController implements Initializable {
         
       private void loadInitialDataFromDatabase() {
           servicesrestaurant ps = new servicesrestaurant();
-    List<restaurant> initialrestaurant = ps.affihcer();
+    List<Restaurant> initialrestaurant = ps.affihcer();
     
     // Populate circuitList with the initial data from the database
     restaurantlist.clear();
@@ -97,9 +97,9 @@ public class AjouterrestauController implements Initializable {
       
                 
          servicesrestaurant sp = new servicesrestaurant();
-        restaurant p = new restaurant( nom,location );
+        Restaurant p = new Restaurant( nom,location );
         sp.ajouter(p);
-         List<restaurant> updatedCircuits = sp.affihcer();
+         List<Restaurant> updatedCircuits = sp.affihcer();
          
             
                 // Specify the output file path where you want to save the PDF
@@ -124,7 +124,7 @@ public class AjouterrestauController implements Initializable {
         @Override
         public void handle(MouseEvent event) {//added 19
             if (event.getClickCount() == 2) { // Double-click event
-                restaurant selectedRestaurant = listv.getSelectionModel().getSelectedItem();
+                Restaurant selectedRestaurant = listv.getSelectionModel().getSelectedItem();
                 if (selectedRestaurant != null) {
                     // Populate the fields with the selected restaurant's data
                     int id = selectedRestaurant.getId();
@@ -151,10 +151,10 @@ public class AjouterrestauController implements Initializable {
         } 
                 
          servicesrestaurant sp = new servicesrestaurant();
-        restaurant p = new restaurant( id,nom,location );
+        Restaurant p = new Restaurant( id,nom,location );
         sp.modifier(p);
             clearTextFields();
-            List<restaurant> updatedCircuits = sp.affihcer();
+            List<Restaurant> updatedCircuits = sp.affihcer();
             restaurantlist.clear();
     restaurantlist.addAll(updatedCircuits);
      // Refresh the ListView to reflect the changes
@@ -163,7 +163,7 @@ public class AjouterrestauController implements Initializable {
 }
         @FXML
         private void supprimerrestau (ActionEvent event) {
- restaurant selectedrestaurant = listv.getSelectionModel().getSelectedItem();
+ Restaurant selectedrestaurant = listv.getSelectionModel().getSelectedItem();
 
     // Check if an item is selected
     if (selectedrestaurant == null) {
@@ -180,7 +180,7 @@ public class AjouterrestauController implements Initializable {
 
     // Clear the TextFields after deleting
     clearTextFields();
-                List<restaurant> updatedCircuits = sp.affihcer();
+                List<Restaurant> updatedCircuits = sp.affihcer();
             restaurantlist.clear();
     restaurantlist.addAll(updatedCircuits);
      // Refresh the ListView to reflect the changes
@@ -204,6 +204,7 @@ public void goBackToManagement(ActionEvent event) {
         e.printStackTrace();
     }
 }
+
 
     private void clearTextFields() {
            idrestaus.clear();

@@ -7,7 +7,7 @@ package restaurant.gui;
 
 import com.sun.xml.internal.bind.IDResolver;
 import gestion_hamdi.reservation;
-import gestion_hamdi.restaurant;
+import gestion_hamdi.Restaurant;
 import gestion_hamdi.servicesreservation;
 import gestion_hamdi.servicesrestaurant;
 import java.io.IOException;
@@ -52,18 +52,18 @@ public class ReservationuserController implements Initializable {
     @FXML
     private ComboBox<String> minuteres;
     @FXML
- private ListView<restaurant> restaurantres;
+ private ListView<Restaurant> restaurantres;
            @FXML
     private TextField idres;
     
-     private ObservableList<restaurant> restaurantlist = FXCollections.observableArrayList();
+     private ObservableList<Restaurant> restaurantlist = FXCollections.observableArrayList();
                 @FXML
     private ListView<reservation> listresu;
     
      private ObservableList<reservation> reservationlist = FXCollections.observableArrayList();
      
-  private restaurant selectedrestaurants;
-    public void setSelectedRestaurant(restaurant selectedRestaurant) {
+  private Restaurant selectedrestaurants;
+    public void setSelectedRestaurant(Restaurant selectedRestaurant) {
         this.selectedrestaurants = selectedRestaurant;
     }
     
@@ -77,9 +77,9 @@ public class ReservationuserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
              loadInitialDataFromDatabase();
-                restaurantres.setCellFactory(param -> new ListCell<restaurant>() {//added19
+                restaurantres.setCellFactory(param -> new ListCell<Restaurant>() {//added19
         @Override
-        protected void updateItem(restaurant item, boolean empty) {
+        protected void updateItem(Restaurant item, boolean empty) {
             super.updateItem(item, empty);
             if (empty || item == null) {
                 setText(null);
@@ -125,7 +125,7 @@ public class ReservationuserController implements Initializable {
    
           private void loadInitialDataFromDatabase() {
           servicesrestaurant ps = new servicesrestaurant();
-    List<restaurant> initialrestaurant = ps.affihcer();
+    List<Restaurant> initialrestaurant = ps.affihcer();
     
     // Populate circuitList with the initial data from the database
     restaurantlist.clear();
@@ -163,7 +163,7 @@ public class ReservationuserController implements Initializable {
             // Parse the string into a LocalTime
             LocalTime localTime = LocalTime.parse(selectedTime, formatter);
         
-         restaurant selectedrestaurant = restaurantres.getSelectionModel().getSelectedItem();
+         Restaurant selectedrestaurant = restaurantres.getSelectionModel().getSelectedItem();
          servicesreservation res = new servicesreservation();
           reservation r = new reservation(1, selectedDate, localTime, selectedrestaurant);
           res.ajouter(r);
@@ -233,7 +233,7 @@ public class ReservationuserController implements Initializable {
             LocalTime localTime = LocalTime.parse(selectedTime, formatter);
              int id = Integer.parseInt( idres.getText());
         
-         restaurant selectedrestaurant = restaurantres.getSelectionModel().getSelectedItem();
+         Restaurant selectedrestaurant = restaurantres.getSelectionModel().getSelectedItem();
          servicesreservation res = new servicesreservation();
           reservation r = new reservation(id, selectedDate, localTime, selectedrestaurant);
           res.modifier(r);
@@ -288,6 +288,24 @@ public void goBackToManagement(ActionEvent event) {
         e.printStackTrace();
     }
 }
+@FXML
+public void chart (ActionEvent event) {
+    // Load the FXML file for the "restaurant management" scene
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("chart.fxml"));
+    try {
+        Parent root = loader.load();
+        Scene managementScene = new Scene(root);
+
+        // Get the current stage
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene of the stage to the "restaurant management" scene
+        currentStage.setScene(managementScene);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 private void showAlert(String message) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Warning");

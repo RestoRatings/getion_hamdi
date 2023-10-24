@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Hamdi
  */
-public class servicesrestaurant implements  Iservice <restaurant>{
+public class servicesrestaurant implements  Iservice <Restaurant>{
     Connection con; 
     Statement ste;
 
@@ -27,7 +27,7 @@ public class servicesrestaurant implements  Iservice <restaurant>{
     
 
     @Override
-    public void ajouter(restaurant t) {
+    public void ajouter(Restaurant t) {
         try {
             String req = "INSERT INTO restaurant(nom,location)values(?,?)";
             PreparedStatement pre = con.prepareStatement(req);
@@ -46,7 +46,7 @@ public class servicesrestaurant implements  Iservice <restaurant>{
     }
 
     @Override
-    public void supprimer(restaurant t) {
+    public void supprimer(Restaurant t) {
   
         try{
         
@@ -59,7 +59,7 @@ public class servicesrestaurant implements  Iservice <restaurant>{
             
         }}
      @Override
-    public void modifier(restaurant t) {
+    public void modifier(Restaurant t) {
         
               try {
             String req = "UPDATE restaurant SET nom = ?, location = ? WHERE id_restau = ?";
@@ -83,17 +83,17 @@ public class servicesrestaurant implements  Iservice <restaurant>{
     
 
     @Override
-    public List<restaurant> affihcer() {
-        List<restaurant> restaurantss = new ArrayList<>();
+    public List<Restaurant> affihcer() {
+        List<Restaurant> restaurantss = new ArrayList<>();
         String sql ="select * from restaurant";
         try {
             ste= con.createStatement();
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next()){
-                restaurant r= new restaurant(rs.getInt("id_restau"),
+                Restaurant r= new Restaurant(rs.getInt("id_restau"),
                         rs.getString("nom"), rs.getString("location"));
                 restaurantss.add(r);
-                for (restaurant element : restaurantss) {
+                for (Restaurant element : restaurantss) {
                 String  hell=element.toStringForDisplay();
                 System.out.println(  hell);
             
@@ -106,7 +106,7 @@ public class servicesrestaurant implements  Iservice <restaurant>{
     }
     
     ////
-    public restaurant getRestaurantParId(int id) {
+    public Restaurant getRestaurantParId(int id) {
     String sql = "SELECT * FROM restaurant WHERE id_restau = ?";
     try {
         PreparedStatement pre = con.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class servicesrestaurant implements  Iservice <restaurant>{
             String location = rs.getString("location");
             
             // Create and return a restaurant object with retrieved data
-            return new restaurant(restaurantId, nom, location);
+            return new Restaurant(restaurantId, nom, location);
         }
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());

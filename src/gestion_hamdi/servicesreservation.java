@@ -42,7 +42,7 @@ public class servicesreservation implements  Iservice <reservation>{
         String formattedTime = r.getTimereser().format(timeFormatter);
             pre.setString(1,formattedDate);
             pre.setString(2,formattedTime);
-            pre.setInt(3,r.restau.getId());
+            pre.setInt(3,r.getRestau().getId());
             pre.setInt(4,55);
             pre.executeUpdate();
             
@@ -114,7 +114,7 @@ public class servicesreservation implements  Iservice <reservation>{
             LocalDate localDate = LocalDate.parse(rs.getString("datereser"), formatter);
               DateTimeFormatter formatters = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalTime times = LocalTime.parse(rs.getString("timereser"), formatters);
-                restaurant restaurantObject = new restaurant();
+                Restaurant restaurantObject = new Restaurant();
                      reservation r= new reservation(rs.getInt("id_res"),
                         localDate, times,restaurantObject);
                      

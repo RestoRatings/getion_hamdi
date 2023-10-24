@@ -7,15 +7,22 @@ package restaurant.gui;
 
 import gestion_hamdi.reservation;
 import gestion_hamdi.servicesreservation;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -45,13 +52,32 @@ public class ChartController implements Initializable {
 
         // Create PieChart.Data for each location and count
         locationCounts.forEach((location, count) -> {
-            PieChart.Data data = new PieChart.Data(location, count);
+            String label = location + " (" + count + ")";
+            
+            PieChart.Data data = new PieChart.Data(label, count);
             pieChartData.add(data);
         });
 
         // Add the pieChartData list to the PieChart
         chart.getData().addAll(pieChartData);
     }
+    @FXML
+public void back (ActionEvent event) {
+    // Load the FXML file for the "restaurant management" scene
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation.fxml"));
+    try {
+        Parent root = loader.load();
+        Scene managementScene = new Scene(root);
+
+        // Get the current stage
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene of the stage to the "restaurant management" scene
+        currentStage.setScene(managementScene);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
         // TODO
     }    
     

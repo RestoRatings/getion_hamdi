@@ -24,7 +24,7 @@ public class reservation {
     private int id_res; 
     private LocalDate datereser ;
     private LocalTime timereser;
-    restaurant restau;
+    Restaurant restau;
      private String restauNom;
 
     public int getId_res() {
@@ -37,11 +37,11 @@ public class reservation {
     
     
 
-    public restaurant getRestau() {
+    public Restaurant getRestau() {
         return restau;
     }
 
-    public void setRestau(restaurant restau) {
+    public void setRestau(Restaurant restau) {
         this.restau = restau;
     }
     
@@ -95,7 +95,7 @@ public class reservation {
 
 
 
-    public reservation(int id_res,LocalDate datereser, LocalTime timereser, restaurant restau) {
+    public reservation(int id_res,LocalDate datereser, LocalTime timereser, Restaurant restau) {
         this.id_res = id_res;
         
         this.datereser = datereser;

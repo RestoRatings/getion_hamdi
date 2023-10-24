@@ -33,9 +33,9 @@ public class Gestion_hamdi {
           
           
         LocalTime time = LocalTime.of(20, 00);
-        restaurant p5 = new restaurant(1,"gabes","fuck");
-        restaurant p2 = new restaurant(1,"yummy","gabes");
-        restaurant p3 = new restaurant(21, "hamdi", "salah");
+        Restaurant p5 = new Restaurant(1,"gabes","fuck");
+        Restaurant p2 = new Restaurant(1,"yummy","gabes");
+        Restaurant p3 = new Restaurant(21, "hamdi", "salah");
         
             
        

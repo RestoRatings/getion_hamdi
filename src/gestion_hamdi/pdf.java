@@ -19,7 +19,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
 public class pdf {
-    public static void generateRestaurantPDF(List<restaurant> restaurantList, String outputPath) {
+    public static void generateRestaurantPDF(List<Restaurant> restaurantList, String outputPath) {
         try {
             PDDocument document = new PDDocument();
             PDPage page = new PDPage();
@@ -31,7 +31,7 @@ public class pdf {
             contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.COURIER), 12);
             float yPosition = page.getMediaBox().getHeight() - 50;
 
-            for (restaurant restaurant : restaurantList) {
+            for (Restaurant restaurant : restaurantList) {
                 contentStream.beginText();
                 contentStream.newLineAtOffset(50, yPosition);
                 contentStream.showText("Restaurant Name: " + restaurant.getNom());

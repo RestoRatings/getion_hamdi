@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author Hamdi
  */
-public class restaurant {
+public class Restaurant {
     private int id_restau; 
     private String nom , location;
     
@@ -40,7 +40,7 @@ public class restaurant {
         this.location = prenom;
     }
 
-        public restaurant(int id_restau, String nom, String location) {
+        public Restaurant(int id_restau, String nom, String location) {
             this.id_restau = id_restau;
             this.nom = nom;
             this.location = location;
@@ -48,12 +48,12 @@ public class restaurant {
 
   
 
-    public restaurant(String nom, String prenom) {
+    public Restaurant(String nom, String prenom) {
         this.nom = nom;
         this.location = prenom;
     }
 
-    public restaurant() {
+    public Restaurant() {
     }
          public String toStringForDisplay() {
         return this.nom + " - " + this.location;
